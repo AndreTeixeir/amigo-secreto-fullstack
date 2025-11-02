@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    # Configuração para Oracle Autonomous Database (ATP)
+    # IMPORTANTE: Após criar o Autonomous Database no OCI:
+    # 1. Baixe o Wallet (arquivo ZIP)
+    # 2. Extraia em uma pasta (ex: /home/usuario/wallet)
+    # 3. Configure TNS_ADMIN apontando para essa pasta
+    # 4. Use o connection string do tipo _high, _medium ou _low
+    
+    url: jdbc:oracle:thin:@amigosecreto_high?TNS_ADMIN=${TNS_ADMIN:/path/to/wallet}
+    username: ${DB_USERNAME:ADMIN}
+    password: ${DB_PASSWORD:your_password_here}
+    driver-class-name: oracle.jdbc.OracleDriver
+    
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 2
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+# CORS - Permitir front-end local
+cors:
+  allowed-origins: http://localhost:3000,http://localhost:8080,http://127.0.0.1:5500
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: "*"
+  allow-credentials: true
+
+logging:
+  level:
+    root: INFO
+    com.amigosecreto: DEBUG
+    org.springframework.security: DEBUG
+

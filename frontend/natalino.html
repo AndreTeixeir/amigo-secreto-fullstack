@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/natalino.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Amigo Secreto - Natalino</title>
+</head>
+
+<body>
+  <header>
+  <nav class="menu-lateral">
+    <ul>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="about.html">Sobre</a></li>
+      <li><a href="form.html">Contato</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <div class="snow-container">
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+    </div>
+    
+    <main class="main-content">
+        <header class="header-banner">
+            <h1 class="main-title">🎄 Amigo Secreto 🎄</h1>
+            <p class="subtitle">Magia do Natal em cada sorteio</p>
+        </header>
+        
+        <section class="input-section">
+            <h2 class="section-title">🎅 Lista de Participantes 🎅</h2>
+            <div class="input-wrapper">
+                <input type="text" id="amigo" class="input-name" placeholder="Nome do participante 🎁">
+                <button class="button-add" onclick="adicionarAmigo()">🎁 Adicionar</button>
+            </div>
+           
+            <ul id="listaAmigos" class="name-list" aria-labelledby="listaAmigos" role="list"></ul>
+            <ul id="resultado" class="result-list" aria-live="polite"></ul>
+
+            <div class="button-container">
+                <button class="button-draw" onclick="sortearAmigo()" aria-label="Sortear amigo secreto">
+                    🎅 Sortear Amigo Secreto 🎁
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>🎄 Desenvolvido por Andre Teixeira 🎄</p>
+        <nav class="theme-nav">
+            <a href="index.html">Minimalista</a>
+            <a href="festivo.html">Festivo</a>
+            <a href="elegante.html">Elegante</a>
+            <a href="natalino.html" class="active">Natalino</a>
+        </nav>
+    </footer>
+
+    <script src="js/app.js" defer></script>
+</body>
+</html>
+

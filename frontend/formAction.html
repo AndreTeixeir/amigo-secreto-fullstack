@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dados Recebidos</title>
+  <link rel="stylesheet" href="css/original.css" />
+</head>
+<body>
+  <header>
+  <nav class="menu-lateral">
+    <ul>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="about.html">Sobre</a></li>
+      <li><a href="form.html">Contato</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+  <main>
+    <h1>Dados Recebidos:</h1>
+    <div id="resultado"></div>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const nome = params.get('nome');
+    const email = params.get('email');
+    const mensagem = params.get('mensagem');
+
+    document.getElementById('resultado').innerHTML = `
+      <p><strong>Nome:</strong> ${nome}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Mensagem:</strong> ${mensagem}</p>
+    `;
+  </script>
+</body>
+</html>
