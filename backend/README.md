@@ -1,6 +1,6 @@
 # 🚀 Amigo Secreto Backend
 
-Back-end da aplicação Amigo Secreto desenvolvido com Java 17 e Spring Boot 3.2.
+Back-end da aplicação Amigo Secreto desenvolvido com Java 21 LTS e Spring Boot 3.2.
 
 ---
 
