@@ -1,340 +1,285 @@
-# 🎉 Amigo Secreto Fullstack
+# 🎁 Amigo Secreto - Sistema Fullstack
 
-Sistema completo de gerenciamento de eventos de amigo secreto com front-end em HTML/CSS/JavaScript e back-end em Java + Spring Boot, integrado com Oracle Cloud Infrastructure.
+Sistema completo para gerenciamento de eventos de amigo secreto com autenticação JWT, desenvolvido com Java, Spring Boot e Oracle Cloud.
 
-[![Java](https://img.shields.io/badge/Java-21-orange)](https://www.oracle.com/java/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2-green)](https://spring.io/projects/spring-boot)
-[![Oracle Cloud](https://img.shields.io/badge/Oracle%20Cloud-Free%20Tier-red)](https://www.oracle.com/cloud/free/)
+[![Java](https://img.shields.io/badge/Java-21_LTS-orange.svg)](https://openjdk.org/)
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2-green.svg)](https://spring.io/projects/spring-boot)
+[![Oracle Cloud](https://img.shields.io/badge/Oracle_Cloud-Always_Free-red.svg)](https://www.oracle.com/cloud/free/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ---
 
 ## 📋 Sobre o Projeto
 
-Aplicação fullstack para gerenciar eventos de amigo secreto, permitindo que usuários:
+Sistema fullstack que permite aos usuários criar eventos de amigo secreto, adicionar participantes e realizar sorteios automáticos, garantindo que ninguém tire a si mesmo.
 
-- 🔐 Criem contas e façam login com autenticação JWT
-- 🎊 Criem e gerenciem eventos de amigo secreto
-- 👥 Adicionem participantes aos eventos
-- 🎲 Realizem sorteios automáticos
-- 📊 Visualizem histórico de sorteios
+### ✨ Funcionalidades
+
+- ✅ **Autenticação JWT** - Registro e login seguros
+- ✅ **Gerenciamento de Eventos** - CRUD completo de eventos
+- ✅ **Gerenciamento de Participantes** - Adicionar e remover participantes
+- ✅ **Sorteio Automático** - Algoritmo inteligente que garante distribuição justa
+- ✅ **Autorização por Usuário** - Cada usuário acessa apenas seus eventos
+- ✅ **Validações Completas** - Email único, mínimo de participantes, etc.
+- ✅ **API RESTful** - Endpoints bem documentados
+- ✅ **Deploy em Cloud** - Pronto para Oracle Cloud Infrastructure
 
 ---
 
 ## 🏗️ Arquitetura
 
+### Stack Tecnológica
+
+**Backend**:
+- Java 21 LTS
+- Spring Boot 3.2 (Web, Security, Data JPA)
+- Spring Security + JWT
+- Flyway Migrations
+- Oracle JDBC Driver
+- Lombok, MapStruct
+- Maven
+
+**Frontend**:
+- HTML5 + CSS3 + JavaScript (Vanilla)
+- Bootstrap 5
+- Fetch API para integração
+
+**Banco de Dados**:
+- Oracle Autonomous Database (ATP)
+- PostgreSQL-compatible mode
+
+**Infraestrutura**:
+- Oracle Cloud Infrastructure (OCI)
+- Compute VM (Ampere A1 - ARM)
+- Nginx (proxy reverso)
+- Systemd (gerenciamento de serviço)
+
+### Modelo de Dados
+
 ```
-┌─────────────────────────────────────────────────────┐
-│              ORACLE CLOUD (OCI)                     │
-├─────────────────────────────────────────────────────┤
-│                                                     │
-│  ┌──────────────┐         ┌──────────────────┐    │
-│  │  Compute VM  │◄────────┤ Autonomous DB    │    │
-│  │  (Ampere A1) │         │     (ATP)        │    │
-│  │              │         │                  │    │
-│  │ • Spring Boot│         │ • PostgreSQL     │    │
-│  │ • Nginx      │         │   compatible     │    │
-│  │ • Front-end  │         │ • 20 GB          │    │
-│  └──────────────┘         └──────────────────┘    │
-│         │                                          │
-└─────────┼──────────────────────────────────────────┘
-          │
-          ▼
-      INTERNET
+USER (1) ──────→ (N) EVENT
+                      │
+                      ├──→ (N) PARTICIPANT
+                      │
+                      └──→ (N) DRAW
 ```
+
+**4 tabelas** com relacionamentos **1:N** implementados.
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+## 🚀 Como Executar
 
-### **Back-end**
-- **Java 21 LTS** - Linguagem de programação
-- **Spring Boot 3.2** - Framework principal
-- **Spring Data JPA** - ORM para acesso a dados
-- **Spring Security** - Segurança e autenticação
-- **JWT** - Autenticação stateless
-- **Flyway** - Migrations de banco de dados
-- **Oracle JDBC** - Driver para Oracle Database
-- **Lombok** - Redução de boilerplate
-- **MapStruct** - Mapeamento de DTOs
-- **Swagger/OpenAPI** - Documentação da API
-- **Maven** - Gerenciamento de dependências
+### Pré-requisitos
 
-### **Front-end**
-- **HTML5** - Estrutura
-- **CSS3** - Estilização
-- **JavaScript (ES6+)** - Lógica e interatividade
-- **Bootstrap 5** - Framework CSS
-- **Fetch API** - Comunicação com back-end
-
-### **Banco de Dados**
-- **Oracle Autonomous Database (ATP)** - Banco de dados gerenciado
-- **PostgreSQL-compatible mode** - Compatibilidade
-
-### **Infraestrutura**
-- **Oracle Cloud Infrastructure (OCI)** - Cloud provider
-- **Docker** - Containerização
-- **Nginx** - Servidor web e proxy reverso
-- **Git/GitHub** - Controle de versão
-
----
-
-## 📁 Estrutura do Projeto
-
-```
-amigo-secreto-fullstack/
-│
-├── frontend/                           # Aplicação front-end
-│   ├── assets/                         # Imagens e recursos
-│   ├── css/                            # Estilos CSS
-│   ├── js/                             # Scripts JavaScript
-│   ├── index.html                      # Página inicial
-│   ├── login.html                      # Página de login
-│   ├── dashboard.html                  # Dashboard do usuário
-│   └── ...
-│
-├── backend/                            # Aplicação Spring Boot
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── java/com/amigosecreto/
-│   │   │   │   ├── config/             # Configurações
-│   │   │   │   ├── controller/         # REST Controllers
-│   │   │   │   ├── service/            # Lógica de negócio
-│   │   │   │   ├── repository/         # Acesso a dados
-│   │   │   │   ├── model/              # Entidades JPA
-│   │   │   │   ├── dto/                # Data Transfer Objects
-│   │   │   │   ├── security/           # Segurança e JWT
-│   │   │   │   └── exception/          # Tratamento de exceções
-│   │   │   └── resources/
-│   │   │       ├── application.yml     # Configuração principal
-│   │   │       └── db/migration/       # Migrations Flyway
-│   │   └── test/                       # Testes
-│   ├── pom.xml                         # Dependências Maven
-│   └── Dockerfile                      # Container do back-end
-│
-├── docs/                               # Documentação
-│   ├── ARCHITECTURE.md                 # Arquitetura do sistema
-│   ├── API.md                          # Documentação da API
-│   ├── DEPLOY_OCI.md                   # Guia de deploy no OCI
-│   └── DATABASE.md                     # Modelo de dados
-│
-├── scripts/                            # Scripts de automação
-│   ├── deploy-backend.sh               # Deploy do back-end
-│   ├── deploy-frontend.sh              # Deploy do front-end
-│   └── setup-oci.sh                    # Setup do Oracle Cloud
-│
-├── docker-compose.yml                  # Orquestração de containers
-├── .gitignore                          # Arquivos ignorados pelo Git
-└── README.md                           # Este arquivo
-```
-
----
-
-## 🔧 Pré-requisitos
-
-### **Para Desenvolvimento Local**
-- Java 21 LTS ou superior
-- Maven 3.8+
-- Oracle Autonomous Database (ou PostgreSQL para testes)
+- Java 21 LTS
+- Maven 3.9+
+- Oracle Autonomous Database (ou PostgreSQL para desenvolvimento)
 - Git
 
-### **Para Deploy no Oracle Cloud**
-- Conta no Oracle Cloud Infrastructure (Free Tier)
-- Oracle Cloud CLI (opcional)
-- SSH key pair
-
----
-
-## 🚀 Como Executar Localmente
-
-### **1. Clonar o Repositório**
+### Desenvolvimento Local
 
 ```bash
+# 1. Clonar repositório
 git clone https://github.com/AndreTeixeir/amigo-secreto-fullstack.git
 cd amigo-secreto-fullstack
-```
 
-### **2. Configurar Banco de Dados**
+# 2. Configurar banco de dados
+# Edite backend/src/main/resources/application-dev.yml
 
-#### **Opção A: Oracle Autonomous Database (Recomendado)**
-
-1. Crie um Autonomous Database no Oracle Cloud
-2. Baixe o Wallet (arquivo ZIP)
-3. Extraia o Wallet em uma pasta (ex: `~/wallet`)
-4. Configure as variáveis de ambiente:
-
-```bash
-export TNS_ADMIN=/caminho/para/wallet
-export DB_USERNAME=ADMIN
-export DB_PASSWORD=sua_senha
-```
-
-#### **Opção B: PostgreSQL Local (Para Testes)**
-
-```bash
-# Instalar PostgreSQL
-sudo apt install postgresql postgresql-contrib
-
-# Criar banco de dados
-sudo -u postgres createdb amigosecreto
-
-# Atualizar application-dev.yml com configurações do PostgreSQL
-```
-
-### **3. Executar o Back-end**
-
-```bash
+# 3. Executar backend
 cd backend
-mvn clean install
-mvn spring-boot:run
+mvn spring-boot:run -Dspring-boot.run.profiles=dev
+
+# 4. Acessar aplicação
+# Backend: http://localhost:8080
+# Frontend: Abra frontend/index.html no navegador
 ```
 
-O back-end estará disponível em: `http://localhost:8080`
+### Deploy em Produção (Oracle Cloud)
 
-**Swagger UI**: `http://localhost:8080/swagger-ui.html`
-
-### **4. Executar o Front-end**
-
-Abra o arquivo `frontend/index.html` em um navegador ou use um servidor local:
+Consulte o [Guia de Deploy](docs/DEPLOY_OCI.md) para instruções completas.
 
 ```bash
-cd frontend
-python3 -m http.server 3000
+# Script automatizado de deploy
+cd backend
+../scripts/deploy.sh
 ```
-
-O front-end estará disponível em: `http://localhost:3000`
 
 ---
 
-## 🌐 Deploy no Oracle Cloud
+## 📚 Documentação
 
-Consulte o guia completo de deploy: [docs/DEPLOY_OCI.md](docs/DEPLOY_OCI.md)
-
-### **Resumo dos Passos**
-
-1. **Criar Autonomous Database** (Always Free)
-2. **Criar Compute Instance** (Ampere A1 - Always Free)
-3. **Configurar Firewall** (liberar portas 80 e 8080)
-4. **Instalar Java e Maven** na VM
-5. **Deploy do Back-end** (Spring Boot)
-6. **Configurar Nginx** para servir front-end
-7. **Configurar domínio** (opcional)
+- [📖 Documentação da API](docs/API.md) - Todos os endpoints e exemplos
+- [🚀 Guia de Deploy OCI](docs/DEPLOY_OCI.md) - Deploy no Oracle Cloud
+- [🏗️ Arquitetura do Sistema](docs/ARCHITECTURE.md) - Detalhes técnicos
+- [⚙️ Configuração](backend/README.md) - Configuração do backend
 
 ---
 
-## 📚 Documentação da API
+## 🔐 API Endpoints
 
-### **Autenticação**
+### Autenticação
 
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| POST | `/api/auth/register` | Registrar novo usuário |
-| POST | `/api/auth/login` | Login e obter token JWT |
-
-### **Eventos**
-
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| GET | `/api/events` | Listar eventos do usuário |
-| GET | `/api/events/{id}` | Buscar evento específico |
-| POST | `/api/events` | Criar novo evento |
-| PUT | `/api/events/{id}` | Atualizar evento |
-| DELETE | `/api/events/{id}` | Deletar evento |
-
-### **Participantes**
-
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| GET | `/api/events/{eventId}/participants` | Listar participantes |
-| POST | `/api/events/{eventId}/participants` | Adicionar participante |
-| PUT | `/api/participants/{id}` | Atualizar participante |
-| DELETE | `/api/participants/{id}` | Remover participante |
-
-### **Sorteio**
-
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| POST | `/api/events/{eventId}/draw` | Realizar sorteio |
-| GET | `/api/events/{eventId}/draw` | Ver resultado do sorteio |
-
-**Documentação completa**: [docs/API.md](docs/API.md) ou acesse o Swagger UI
-
----
-
-## 🗄️ Modelo de Dados
-
-```
-┌─────────────┐
-│    USERS    │
-├─────────────┤
-│ id (PK)     │
-│ username    │
-│ email       │
-│ password    │
-└─────────────┘
-       │
-       │ 1:N
-       ▼
-┌─────────────┐
-│   EVENTS    │
-├─────────────┤
-│ id (PK)     │
-│ user_id (FK)│
-│ name        │
-│ description │
-│ event_date  │
-│ status      │
-└─────────────┘
-       │
-       │ 1:N
-       ▼
-┌──────────────┐
-│ PARTICIPANTS │
-├──────────────┤
-│ id (PK)      │
-│ event_id (FK)│
-│ name         │
-│ email        │
-└──────────────┘
-       │
-       │ 1:N
-       ▼
-┌─────────────┐
-│    DRAWS    │
-├─────────────┤
-│ id (PK)     │
-│ event_id    │
-│ giver_id    │
-│ receiver_id │
-└─────────────┘
+```http
+POST /api/auth/register  # Registrar usuário
+POST /api/auth/login     # Login
 ```
 
-**Documentação completa**: [docs/DATABASE.md](docs/DATABASE.md)
+### Eventos
+
+```http
+GET    /api/events           # Listar eventos
+POST   /api/events           # Criar evento
+GET    /api/events/{id}      # Buscar evento
+PUT    /api/events/{id}      # Atualizar evento
+DELETE /api/events/{id}      # Deletar evento
+```
+
+### Participantes
+
+```http
+GET    /api/events/{id}/participants              # Listar participantes
+POST   /api/events/{id}/participants              # Adicionar participante
+DELETE /api/events/{id}/participants/{pid}        # Remover participante
+```
+
+### Sorteio
+
+```http
+POST   /api/events/{id}/draw                      # Realizar sorteio
+GET    /api/events/{id}/draw                      # Listar sorteios
+GET    /api/events/{id}/draw/participant/{pid}    # Buscar sorteio de participante
+DELETE /api/events/{id}/draw                      # Deletar sorteios (refazer)
+```
+
+Consulte a [documentação completa da API](docs/API.md) para mais detalhes.
 
 ---
 
 ## 🧪 Testes
 
+### Executar Testes
+
 ```bash
-# Executar todos os testes
 cd backend
 mvn test
-
-# Executar testes com cobertura
-mvn test jacoco:report
 ```
+
+### Testar API com cURL
+
+```bash
+# Registrar usuário
+curl -X POST http://localhost:8080/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"teste","email":"teste@test.com","password":"senha123"}'
+
+# Login
+TOKEN=$(curl -X POST http://localhost:8080/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"teste","password":"senha123"}' \
+  | jq -r '.token')
+
+# Criar evento
+curl -X POST http://localhost:8080/api/events \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Natal 2024","eventDate":"2024-12-25"}'
+```
+
+---
+
+## 🎲 Algoritmo de Sorteio
+
+O sistema implementa um algoritmo inteligente que:
+
+✅ Garante que ninguém tira a si mesmo
+✅ Distribui aleatoriamente os participantes
+✅ Valida mínimo de 3 participantes
+✅ Permite refazer o sorteio
+✅ Bloqueia modificações após sorteio
+
+---
+
+## 📊 Estrutura do Projeto
+
+```
+amigo-secreto-fullstack/
+├── frontend/                 # Front-end (HTML/CSS/JS)
+│   ├── assets/              # Imagens e recursos
+│   ├── css/                 # Estilos
+│   ├── js/                  # Scripts
+│   └── index.html           # Página principal
+│
+├── backend/                 # Back-end (Spring Boot)
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/
+│   │   │   │   └── com/amigosecreto/
+│   │   │   │       ├── config/          # Configurações
+│   │   │   │       ├── controller/      # Controllers REST
+│   │   │   │       ├── dto/             # DTOs
+│   │   │   │       ├── exception/       # Exception handling
+│   │   │   │       ├── model/           # Entidades JPA
+│   │   │   │       ├── repository/      # Repositories
+│   │   │   │       ├── security/        # Segurança e JWT
+│   │   │   │       └── service/         # Lógica de negócio
+│   │   │   └── resources/
+│   │   │       ├── application.yml      # Configuração principal
+│   │   │       ├── application-dev.yml  # Configuração dev
+│   │   │       ├── application-prod.yml # Configuração prod
+│   │   │       └── db/migration/        # Flyway migrations
+│   │   └── test/                        # Testes
+│   ├── pom.xml                          # Dependências Maven
+│   └── Dockerfile                       # Container Docker
+│
+├── docs/                    # Documentação
+│   ├── API.md              # Documentação da API
+│   ├── DEPLOY_OCI.md       # Guia de deploy
+│   └── ARCHITECTURE.md     # Arquitetura do sistema
+│
+├── scripts/                # Scripts de automação
+│   └── deploy.sh           # Script de deploy
+│
+├── docker-compose.yml      # Orquestração Docker
+└── README.md              # Este arquivo
+```
+
+---
+
+## 🛡️ Segurança
+
+- **JWT** para autenticação stateless
+- **BCrypt** para hash de senhas
+- **Spring Security** para autorização
+- **Validações** em todas as camadas
+- **CORS** configurado
+- **HTTPS** recomendado em produção
+
+---
+
+## 💰 Custos (Oracle Cloud)
+
+Este projeto utiliza apenas recursos **Always Free** da Oracle Cloud:
+
+- ✅ Autonomous Database: 1 OCPU, 20 GB (gratuito)
+- ✅ Compute VM: 2 OCPUs ARM, 12 GB RAM (gratuito)
+- ✅ Networking: 10 TB/mês (gratuito)
+- ✅ Storage: 200 GB (gratuito)
+
+**Custo total**: R$ 0,00 💸
 
 ---
 
 ## 🤝 Contribuindo
 
-Contribuições são bem-vindas! Siga os passos:
+Contribuições são bem-vindas! Sinta-se à vontade para:
 
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/MinhaFeature`)
-3. Commit suas mudanças (`git commit -m 'feat: adicionar MinhaFeature'`)
-4. Push para a branch (`git push origin feature/MinhaFeature`)
-5. Abra um Pull Request
+1. Fazer fork do projeto
+2. Criar uma branch para sua feature (`git checkout -b feature/nova-feature`)
+3. Commit suas mudanças (`git commit -m 'feat: adicionar nova feature'`)
+4. Push para a branch (`git push origin feature/nova-feature`)
+5. Abrir um Pull Request
 
 ---
 
@@ -344,28 +289,34 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ---
 
-## 👤 Autor
+## 👨‍💻 Autor
 
 **Andre Teixeira**
 
 - GitHub: [@AndreTeixeir](https://github.com/AndreTeixeir)
-- LinkedIn: [Andre Teixeira](https://www.linkedin.com/in/andre-teixeira)
+- LinkedIn: [Andre Teixeira](https://linkedin.com/in/andre-teixeira)
 
 ---
 
 ## 🙏 Agradecimentos
 
 - Oracle Cloud Infrastructure pela plataforma Always Free
-- Spring Boot pela excelente documentação
+- Spring Framework pela excelente documentação
 - Comunidade open source
 
 ---
 
 ## 📞 Suporte
 
-Se você tiver alguma dúvida ou problema, abra uma [issue](https://github.com/AndreTeixeir/amigo-secreto-fullstack/issues) no GitHub.
+Se você tiver alguma dúvida ou problema:
+
+1. Consulte a [documentação](docs/)
+2. Abra uma [issue](https://github.com/AndreTeixeir/amigo-secreto-fullstack/issues)
+3. Entre em contato via LinkedIn
 
 ---
 
-**Desenvolvido com ❤️ e ☕ por Andre Teixeira**
+⭐ Se este projeto foi útil para você, considere dar uma estrela no GitHub!
+
+**Desenvolvido com ❤️ por Andre Teixeira**
 
